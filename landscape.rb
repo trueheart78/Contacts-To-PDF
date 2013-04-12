@@ -47,24 +47,30 @@ if File.readable?(filename_in)
 
       line2 = "\n"
       line2 = phone1 unless phone1 == nil
-      line2 = "#{line2}\n(#{type1})" unless type1 == nil or type1.empty?
-
-      line3 = ""
-      line3 = phone2 unless phone2 == nil
-      line3 = "#{line3}\n(#{type2})" unless type2 == nil or type2.empty?
+      
+      line3 = "\n"
+      line3 = "(#{type1})" unless type1 == nil or type1.empty?
 
       line4 = "\n"
-      line4 = "\nID: #{id}" unless id == nil
-
+      line4 = phone2 unless phone2 == nil
+      
       line5 = "\n"
-      line5 = notes unless notes == nil
+      line5 = "(#{type2})" unless type2 == nil or type2.empty?
+
+      line6 = "\n"
+      line6 = "\nID: #{id}" unless id == nil
+
+      line7 = "\n"
+      line7 = notes unless notes == nil
       if not line1.empty?
         pdf.font "Courier"
         pdf.text("#{line1}", :align=>:center, :size=>font_main, :style=>:bold)
-        pdf.text("\n#{line2}", :align=>:center, :size=>font_main, :style=>:bold)
+        pdf.text("#{line2}", :align=>:center, :size=>font_main, :style=>:bold)
         pdf.text("#{line3}", :align=>:center, :size=>font_main, :style=>:bold)
         pdf.text("#{line4}", :align=>:center, :size=>font_size, :style=>:bold)
-        #pdf.text("#{line5}", :align=>:center, :size=>font_size, :style=>:bold)
+        pdf.text("#{line5}", :align=>:center, :size=>font_size, :style=>:bold)
+        pdf.text("#{line6}", :align=>:center, :size=>font_size, :style=>:bold)
+        pdf.text("#{line7}", :align=>:center, :size=>font_size, :style=>:bold)
         pdf.start_new_page
       end
     end
