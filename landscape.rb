@@ -4,7 +4,7 @@ require 'prawn'
 
 #the file that we'll be loading in - XLSX extension is required
 filename_in = 'pauls_numbers.xlsx'
-filename_out = 'pauls_book.pdf'
+filename_out = 'pauls_book-landscape.pdf'
 
 font_main = 72
 font_size = 64
@@ -15,7 +15,8 @@ if File.readable?(filename_in)
   ss.default_sheet = ss.sheets.first
   puts "now in memory"
   puts "Starting PDF creation of #{filename_out}."
-  Prawn::Document.generate(filename_out) do |pdf|
+  Prawn::Document.generate(filename_out, :page_layout=>:landscape) do |pdf|
+    
     2.upto(ss.last_row) do |line|      
       fname = ss.cell(line,'A').to_s.upcase.rstrip if ss.cell(line,'A')
       lname = ss.cell(line,'B').to_s.upcase.lstrip if ss.cell(line,'B')
@@ -53,7 +54,7 @@ if File.readable?(filename_in)
       line3 = "#{line3}\n(#{type2})" unless type2 == nil or type2.empty?
 
       line4 = "\n"
-      line4 = "\nID:\n#{id}" unless id == nil
+      line4 = "\nID: #{id}" unless id == nil
 
       line5 = "\n"
       line5 = notes unless notes == nil
